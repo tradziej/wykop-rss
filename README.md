@@ -19,3 +19,13 @@ docker build -t wykop-rss .
 ```
 docker run -d -p 9001:9001 -e "WYKOP_APP_KEY=xxx" wykop-rss
 ```
+
+
+## Deployment
+```
+npm -i g now
+```
+
+```
+now --public -e WYKOP_APP_KEY=xxx
+```

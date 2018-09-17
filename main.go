@@ -34,5 +34,5 @@ func main() {
 	router := gin.Default()
 
 	router.GET("/newest", newest)
-	log.Fatal(router.Run("localhost:9001"))
+	log.Fatal(router.Run("0.0.0.0:9001"))
 }

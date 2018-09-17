@@ -10,3 +10,12 @@ Please create a `.env` file with your credentials
 ```
 WYKOP_APP_KEY=
 ```
+
+## Docker
+```
+docker build -t wykop-rss .
+```
+
+```
+docker run -d -p 9001:9001 -e "WYKOP_APP_KEY=xxx" wykop-rss
+```

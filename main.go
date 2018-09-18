@@ -11,7 +11,7 @@ import (
 	"github.com/tradziej/wykop-rss/utils"
 )
 
-func newest(c *gin.Context) {
+func promoted(c *gin.Context) {
 	links, err := api.GetLinks()
 
 	if err != nil {
@@ -36,6 +36,6 @@ func newest(c *gin.Context) {
 func main() {
 	router := gin.Default()
 
-	router.GET("/newest", newest)
+	router.GET("/promoted", promoted)
 	log.Fatal(router.Run("0.0.0.0:9001"))
 }

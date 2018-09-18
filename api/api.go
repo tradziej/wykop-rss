@@ -40,12 +40,10 @@ type Link struct {
 }
 
 func (link Link) GetCreatedAt() time.Time {
-	loc, _ := time.LoadLocation("Europe/Warsaw")
-
-	if d, err := time.ParseInLocation("2006-01-02 15:04:05", link.Date, loc); err != nil {
+	if d, err := time.Parse("2006-01-02 15:04:05", link.Date); err == nil {
 		return d
 	} else {
-		return time.Now().UTC()
+		return time.Now()
 	}
 }
 

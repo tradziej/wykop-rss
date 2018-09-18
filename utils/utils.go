@@ -5,13 +5,18 @@ import (
 	"time"
 )
 
-func StringToDate(fmt string, input time.Time) string {
+func StringToDate(fmt string, t time.Time) string {
+	loc, err := time.LoadLocation("Europe/Warsaw")
+	if err == nil {
+		t = t.In(loc)
+	}
+
 	switch fmt {
 	case "rss":
-		return input.Format(time.RFC1123Z)
+		return t.Format(time.RFC1123Z)
 	case "http":
-		return input.Format(http.TimeFormat)
+		return t.Format(http.TimeFormat)
 	default:
-		return input.Format(time.RFC1123Z)
+		return t.Format(time.RFC1123Z)
 	}
 }

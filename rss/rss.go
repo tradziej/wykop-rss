@@ -55,7 +55,8 @@ type (
 	}
 
 	Params struct {
-		AtomLink string
+		AtomLink     string
+		ChannelTitle string
 	}
 )
 
@@ -80,7 +81,7 @@ func Generate(links *api.Links, p Params) *rss {
 		Channel: channel{
 			Generator:     "wykop-rss",
 			Docs:          generatorURL,
-			Title:         "Wykop.pl - Strona Główna",
+			Title:         p.ChannelTitle,
 			Description:   "Wykop - serwis tworzony przez użykowników",
 			Link:          wykopURL,
 			AtomLink:      atomLink{p.AtomLink, "self", "application/rss+xml"},

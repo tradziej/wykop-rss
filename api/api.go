@@ -16,6 +16,7 @@ const (
 )
 
 var promotedEndpoint = wykopAPI + "Links/Promoted/" + "appkey/" + config.Get().WykopAppKey
+var upcomingEndpoint = wykopAPI + "Links/Upcoming/" + "appkey/" + config.Get().WykopAppKey
 
 var wykopAPIClient = http.Client{
 	Timeout: 10 * time.Second,
@@ -51,8 +52,18 @@ func (link Link) GetGUID() string {
 	return wykoLinkURL + strconv.Itoa(link.ID)
 }
 
-func GetLinks() (*Links, error) {
-	resp, err := wykopAPIClient.Get(promotedEndpoint)
+func GetLinks(endpoint string) (*Links, error) {
+	var e string
+	switch endpoint {
+	case "promoted":
+		e = promotedEndpoint
+	case "upcoming":
+		e = upcomingEndpoint
+	default:
+		e = promotedEndpoint
+	}
+
+	resp, err := wykopAPIClient.Get(e)
 
 	if err != nil {
 		return nil, errors.New("Error requesting Wykop.pl API")

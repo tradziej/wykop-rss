@@ -10,8 +10,8 @@ import (
 	"github.com/tradziej/wykop-rss/utils"
 )
 
-func Promoted(c *gin.Context) {
-	links, err := api.GetLinks("promoted")
+func Upcoming(c *gin.Context) {
+	links, err := api.GetLinks("upcoming")
 
 	if err != nil {
 		c.Error(err)
@@ -27,7 +27,7 @@ func Promoted(c *gin.Context) {
 
 	params := rss.Params{
 		AtomLink:     config.Get().AppURL + c.Request.URL.String(),
-		ChannelTitle: "Wykop.pl - Strona Główna",
+		ChannelTitle: "Wykop.pl - Wykopalisko",
 	}
 
 	rss := rss.Generate(links, params)

@@ -12,6 +12,7 @@ func main() {
 	router.LoadHTMLFiles("html/index.html")
 
 	router.GET("/promoted", endpoints.Promoted)
+	router.GET("/upcoming", endpoints.Upcoming)
 
 	router.GET("/", endpoints.Index)
 

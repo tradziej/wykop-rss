@@ -28,6 +28,13 @@ func Upcoming(c *gin.Context) {
 	handler(c, &params)
 }
 
+func Popular(c *gin.Context) {
+	params := rss.Params{
+		ChannelTitle: "Wykop.pl - Ostatnio Popularne",
+	}
+	handler(c, &params)
+}
+
 func handler(c *gin.Context, p *rss.Params) {
 	requestURL := c.Request.URL.String()
 	p.AtomLink = config.Get().AppURL + requestURL

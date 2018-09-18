@@ -15,8 +15,11 @@ const (
 	wykoLinkURL = "https://www.wykop.pl/link/"
 )
 
-var promotedEndpoint = wykopAPI + "Links/Promoted/" + "appkey/" + config.Get().WykopAppKey
-var upcomingEndpoint = wykopAPI + "Links/Upcoming/" + "appkey/" + config.Get().WykopAppKey
+var (
+	promotedEndpoint = wykopAPI + "Links/Promoted/" + "appkey/" + config.Get().WykopAppKey
+	upcomingEndpoint = wykopAPI + "Links/Upcoming/" + "appkey/" + config.Get().WykopAppKey
+	popularEndpoint  = wykopAPI + "Hits/Popular/" + "appkey/" + config.Get().WykopAppKey
+)
 
 var wykopAPIClient = http.Client{
 	Timeout: 10 * time.Second,
@@ -59,6 +62,8 @@ func GetLinks(endpoint string) (*Links, error) {
 		e = promotedEndpoint
 	case "upcoming":
 		e = upcomingEndpoint
+	case "popular":
+		e = popularEndpoint
 	default:
 		e = promotedEndpoint
 	}

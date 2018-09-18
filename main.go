@@ -13,6 +13,7 @@ func main() {
 
 	router.GET("/promoted", endpoints.Promoted)
 	router.GET("/upcoming", endpoints.Upcoming)
+	router.GET("/popular", endpoints.Popular)
 
 	router.GET("/", endpoints.Index)
 

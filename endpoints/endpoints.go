@@ -10,8 +10,29 @@ import (
 	"github.com/tradziej/wykop-rss/utils"
 )
 
+func Index(c *gin.Context) {
+	c.HTML(http.StatusOK, "index.html", gin.H{"title": "wykop-rss"})
+}
+
 func Promoted(c *gin.Context) {
-	links, err := api.GetLinks("promoted")
+	params := rss.Params{
+		ChannelTitle: "Wykop.pl - Strona Główna",
+	}
+	handler(c, &params)
+}
+
+func Upcoming(c *gin.Context) {
+	params := rss.Params{
+		ChannelTitle: "Wykop.pl - Wykopalisko",
+	}
+	handler(c, &params)
+}
+
+func handler(c *gin.Context, p *rss.Params) {
+	requestURL := c.Request.URL.String()
+	p.AtomLink = config.Get().AppURL + requestURL
+
+	links, err := api.GetLinks(requestURL[1:])
 
 	if err != nil {
 		c.Error(err)
@@ -25,12 +46,7 @@ func Promoted(c *gin.Context) {
 		c.Writer.Header().Set("Last-Modified", utils.StringToDate("http", link.GetCreatedAt()))
 	}
 
-	params := rss.Params{
-		AtomLink:     config.Get().AppURL + c.Request.URL.String(),
-		ChannelTitle: "Wykop.pl - Strona Główna",
-	}
-
-	rss := rss.Generate(links, params)
+	rss := rss.Generate(links, p)
 
 	c.XML(http.StatusOK, rss)
 }

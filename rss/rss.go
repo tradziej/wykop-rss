@@ -60,7 +60,7 @@ type (
 	}
 )
 
-func Generate(links *api.Links, p Params) *rss {
+func Generate(links *api.Links, p *Params) *rss {
 	items := []item{}
 
 	for _, link := range links.Data {

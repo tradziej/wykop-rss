@@ -25,11 +25,12 @@ var wykopAPIClient = http.Client{
 	Timeout: 10 * time.Second,
 }
 
+// Links contains given array of links.
 type Links struct {
-	Data []Link
+	Data []link
 }
 
-type Link struct {
+type link struct {
 	ID            int
 	Title         string
 	Description   string
@@ -43,18 +44,18 @@ type Link struct {
 	Author        string `json:"author:login"`
 }
 
-func (link Link) GetCreatedAt() time.Time {
+func (link link) GetCreatedAt() time.Time {
 	if d, err := time.Parse("2006-01-02 15:04:05", link.Date); err == nil {
 		return d
-	} else {
-		return time.Now()
 	}
+	return time.Now()
 }
 
-func (link Link) GetGUID() string {
+func (link link) GetGUID() string {
 	return wykoLinkURL + strconv.Itoa(link.ID)
 }
 
+// GetLinks fetchs API for given endpoint.
 func GetLinks(endpoint string) (*Links, error) {
 	var e string
 	switch endpoint {

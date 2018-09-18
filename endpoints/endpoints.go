@@ -10,10 +10,12 @@ import (
 	"github.com/tradziej/wykop-rss/utils"
 )
 
+// Index renders index.html page.
 func Index(c *gin.Context) {
 	c.HTML(http.StatusOK, "index.html", gin.H{"title": "wykop-rss"})
 }
 
+// Promoted renders links from promoted endpoint.
 func Promoted(c *gin.Context) {
 	params := rss.Params{
 		ChannelTitle: "Wykop.pl - Strona Główna",
@@ -21,6 +23,7 @@ func Promoted(c *gin.Context) {
 	handler(c, &params)
 }
 
+// Upcoming renders links from upcoming endpoint.
 func Upcoming(c *gin.Context) {
 	params := rss.Params{
 		ChannelTitle: "Wykop.pl - Wykopalisko",
@@ -28,6 +31,7 @@ func Upcoming(c *gin.Context) {
 	handler(c, &params)
 }
 
+// Popular renders links from popular endpoint.
 func Popular(c *gin.Context) {
 	params := rss.Params{
 		ChannelTitle: "Wykop.pl - Ostatnio Popularne",

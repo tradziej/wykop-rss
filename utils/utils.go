@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+// StringToDate formats time for different purposes.
 func StringToDate(fmt string, t time.Time) string {
 	loc, err := time.LoadLocation("Europe/Warsaw")
 	if err == nil {

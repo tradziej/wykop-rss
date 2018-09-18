@@ -13,6 +13,7 @@ var (
 	envInstanceOnce sync.Once
 )
 
+// Get returns envInstance.
 func Get() Env {
 	envInstanceOnce.Do(func() {
 		godotenv.Load()
@@ -25,6 +26,7 @@ func Get() Env {
 	return envInstance
 }
 
+// Env contains information about enviroment variables.
 type Env struct {
 	WykopAppKey string `env:"WYKOP_APP_KEY" envDefault:""`
 	AppURL      string `env:"APP_URL" envDefault:"https://wykop-rss.now.sh"`

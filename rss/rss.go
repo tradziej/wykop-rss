@@ -14,7 +14,8 @@ const (
 )
 
 type (
-	rss struct {
+	// RSS contains the fields associated with the rss tag in the rss document.
+	RSS struct {
 		XMLName xml.Name `xml:"rss"`
 		Version string   `xml:"version,attr"`
 		NS      string   `xml:"xmlns:atom,attr"`
@@ -54,13 +55,15 @@ type (
 		Type         string `xml:"type,attr,omitempty"`
 	}
 
+	// Params contains RSS feed parameters.
 	Params struct {
 		AtomLink     string
 		ChannelTitle string
 	}
 )
 
-func Generate(links *api.Links, p *Params) *rss {
+// Generate generate RSS feed for given links and feed params.
+func Generate(links *api.Links, p *Params) *RSS {
 	items := []item{}
 
 	for _, link := range links.Data {
@@ -75,7 +78,7 @@ func Generate(links *api.Links, p *Params) *rss {
 		items = append(items, item)
 	}
 
-	rss := rss{
+	rss := RSS{
 		Version: "2.0",
 		NS:      "http://www.w3.org/2005/Atom",
 		Channel: channel{

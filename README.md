@@ -28,7 +28,7 @@ npm -i g now
 ```
 
 ```
-now --public -e WYKOP_APP_KEY=xxx APP_URL=yyy
+now --public -e WYKOP_APP_KEY=xxx -e APP_URL=yyy
 ```
 
 ```

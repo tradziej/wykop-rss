@@ -43,7 +43,7 @@ type (
 
 	guid struct {
 		Value       string `xml:",chardata"`
-		IsPermalink string `xml:"isPermalink,attr"`
+		IsPermaLink string `xml:"isPermaLink,attr"`
 	}
 )
 

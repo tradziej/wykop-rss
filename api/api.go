@@ -60,9 +60,8 @@ func GetLinks() (*Links, error) {
 	defer resp.Body.Close()
 
 	var parsed Links
-	decoder := json.NewDecoder(resp.Body)
-	err = decoder.Decode(&parsed)
-	if err != nil {
+
+	if err := json.NewDecoder(resp.Body).Decode(&parsed); err != nil {
 		return nil, errors.New("Invalid JSON")
 	}
 

@@ -55,7 +55,6 @@ func GetLinks() (*Links, error) {
 	resp, err := wykopAPIClient.Get(promotedEndpoint)
 
 	if err != nil {
-		println(err)
 		return nil, errors.New("Error requesting Wykop.pl API")
 	}
 	defer resp.Body.Close()
@@ -64,7 +63,6 @@ func GetLinks() (*Links, error) {
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&parsed)
 	if err != nil {
-		println(err)
 		return nil, errors.New("Invalid JSON")
 	}
 

@@ -1,12 +1,12 @@
 ## Fresh
 
-Fresh could you help with hot reloading at developing
+Fresh could you help with hot reloading on developing.
 ```
 go get -u github.com/pilu/fresh
 ```
 
 ## Environment variables
-Please create a `.env` file with your credentials
+Please create a `.env` file with your credentials.
 ```
 WYKOP_APP_KEY=
 APP_URL=
@@ -18,7 +18,7 @@ docker build -t wykop-rss .
 ```
 
 ```
-docker run -d -p 9001:9001 -e "WYKOP_APP_KEY=xxx" "APP_URL=yyy" wykop-rss
+docker run -d -p 9001:9001 --env-file ./.env wykop-rss
 ```
 
 
@@ -29,4 +29,8 @@ npm -i g now
 
 ```
 now --public -e WYKOP_APP_KEY=xxx APP_URL=yyy
+```
+
+```
+now alias https://wykop-rss-xyz.now.sh abc-wykop-rss
 ```

@@ -27,4 +27,5 @@ func Get() Env {
 
 type Env struct {
 	WykopAppKey string `env:"WYKOP_APP_KEY" envDefault:""`
+	AppURL      string `env:"APP_URL" envDefault:"https://wykop-rss.now.sh"`
 }

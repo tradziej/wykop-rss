@@ -17,6 +17,7 @@ type (
 	rss struct {
 		XMLName xml.Name `xml:"rss"`
 		Version string   `xml:"version,attr"`
+		NS      string   `xml:"xmlns:atom,attr"`
 		Channel channel  `xml:"channel"`
 	}
 
@@ -27,6 +28,7 @@ type (
 		Title         string   `xml:"title"`
 		Description   string   `xml:"description"`
 		Link          string   `xml:"link"`
+		AtomLink      atomLink `xml:"atom:link"`
 		LastBuildDate string   `xml:"lastBuildDate"`
 		Items         []item   `xml:"item"`
 	}
@@ -45,9 +47,19 @@ type (
 		Value       string `xml:",chardata"`
 		IsPermaLink string `xml:"isPermaLink,attr"`
 	}
+
+	atomLink struct {
+		Reference    string `xml:"href,attr"`
+		Relationship string `xml:"rel,attr,omitempty"`
+		Type         string `xml:"type,attr,omitempty"`
+	}
+
+	Params struct {
+		AtomLink string
+	}
 )
 
-func Generate(links *api.Links) *rss {
+func Generate(links *api.Links, p Params) *rss {
 	items := []item{}
 
 	for _, link := range links.Data {
@@ -64,12 +76,14 @@ func Generate(links *api.Links) *rss {
 
 	rss := rss{
 		Version: "2.0",
+		NS:      "http://www.w3.org/2005/Atom",
 		Channel: channel{
 			Generator:     "wykop-rss",
 			Docs:          generatorURL,
 			Title:         "Wykop.pl - Strona Główna",
 			Description:   "Wykop - serwis tworzony przez użykowników",
 			Link:          wykopURL,
+			AtomLink:      atomLink{p.AtomLink, "self", "application/rss+xml"},
 			LastBuildDate: utils.StringToDate("rss", time.Now().UTC()),
 			Items:         items,
 		},

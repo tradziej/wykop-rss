@@ -6,6 +6,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/tradziej/wykop-rss/api"
+	"github.com/tradziej/wykop-rss/config"
 	"github.com/tradziej/wykop-rss/rss"
 	"github.com/tradziej/wykop-rss/utils"
 )
@@ -25,7 +26,9 @@ func newest(c *gin.Context) {
 		c.Writer.Header().Set("Last-Modified", utils.StringToDate("http", link.GetCreatedAt()))
 	}
 
-	rss := rss.Generate(links)
+	params := rss.Params{AtomLink: config.Get().AppURL + c.Request.URL.String()}
+
+	rss := rss.Generate(links, params)
 
 	c.XML(http.StatusOK, rss)
 }

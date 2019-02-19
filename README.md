@@ -32,7 +32,7 @@ docker run -d -p 9001:9001 --env-file ./.env wykop-rss
 
 ## Deployment
 ```
-npm -i g now
+npm i -g now
 ```
 
 ```

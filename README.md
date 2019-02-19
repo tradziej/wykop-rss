@@ -1,11 +1,19 @@
-## Fresh
+## Development
 
-Fresh could you help with hot reloading on developing.
+Fresh could you help with hot reloading on development.
 ```
 go get -u github.com/pilu/fresh
 ```
 
-## Environment variables
+```
+go get
+```
+
+```
+fresh
+```
+
+### Environment variables
 Please create a `.env` file with your credentials.
 ```
 WYKOP_APP_KEY=

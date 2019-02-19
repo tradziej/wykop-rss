@@ -1,21 +1,17 @@
 package main
 
 import (
-	"log"
+	"net/http"
 
-	"github.com/gin-gonic/gin"
 	"github.com/tradziej/wykop-rss/endpoints"
 )
 
 func main() {
-	router := gin.Default()
-	router.LoadHTMLFiles("html/index.html")
+	http.HandleFunc("/", endpoints.Index)
 
-	router.GET("/promoted", endpoints.Promoted)
-	router.GET("/upcoming", endpoints.Upcoming)
-	router.GET("/popular", endpoints.Popular)
+	http.HandleFunc("/promoted", endpoints.Promoted)
+	http.HandleFunc("/upcoming", endpoints.Upcoming)
+	http.HandleFunc("/popular", endpoints.Popular)
 
-	router.GET("/", endpoints.Index)
-
-	log.Fatal(router.Run("0.0.0.0:9001"))
+	http.ListenAndServe(":9001", nil)
 }

@@ -5,6 +5,7 @@ Fresh could you help with hot reloading on development.
 go get -u github.com/pilu/fresh
 ```
 
+Project uses `go mod` for dependency management (available from `go 1.11`).
 ```
 go get
 ```

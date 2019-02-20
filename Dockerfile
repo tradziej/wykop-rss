@@ -1,15 +1,20 @@
 FROM golang:1.11-alpine as base
-WORKDIR /go/src/github.com/tradziej/wykop-rss
+
+WORKDIR /app
+
+RUN apk add --no-cache ca-certificates git
+
+COPY go.mod .
+COPY go.sum .
+RUN go mod download
+
 COPY . .
 
-RUN apk --no-cache add git
-RUN go get -v ./...
-RUN apk --update add ca-certificates
 RUN CGO_ENABLED=0 go build -ldflags "-s -w" -o main
 
 FROM scratch
-COPY --from=base /go/src/github.com/tradziej/wykop-rss/main /wykop-rss
-COPY --from=base /go/src/github.com/tradziej/wykop-rss/html ./html
+COPY --from=base /app/main /wykop-rss
+COPY --from=base /app/html ./html
 COPY --from=base /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/ca-certificates.crt
 EXPOSE 9001
 CMD ["/wykop-rss"]

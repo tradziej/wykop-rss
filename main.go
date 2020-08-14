@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/tradziej/wykop-rss/endpoints"
+	"github.com/tradziej/wykop-rss/config"
 )
 
 func main() {
@@ -13,5 +14,5 @@ func main() {
 	http.HandleFunc("/upcoming", endpoints.Upcoming)
 	http.HandleFunc("/popular", endpoints.Popular)
 
-	http.ListenAndServe(":9001", nil)
+	http.ListenAndServe(":"+config.Get().AppPort, nil)
 }

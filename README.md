@@ -31,7 +31,7 @@ docker run -d -p 9001:9001 --env-file ./.env wykop-rss
 ```
 
 
-## Deployment
+## Deployment (deprecated)
 Warning: Docker deployment on [zeit.co/now](zeit.co/now/) is depreciated for new users.
 ```
 npm i -g now
